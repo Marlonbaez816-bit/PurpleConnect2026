@@ -4,6 +4,7 @@
     --bg-white: #FFFFFF;
     --text-dark: #2E004E;
     --success: #2ecc71;
+    --cyan-accent: #00bcd4;
 }
 
 body {
@@ -11,6 +12,7 @@ body {
     font-family: -apple-system, sans-serif;
     background-color: var(--bg-white);
     color: var(--text-dark);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .app-container { height: 100vh; display: flex; flex-direction: column; }
@@ -24,8 +26,12 @@ header { padding: 60px 20px 20px; display: flex; justify-content: space-between;
     background: linear-gradient(135deg, var(--purple-main), var(--purple-glow));
     border-radius: 30px; color: white; text-align: center;
     box-shadow: 0 10px 30px rgba(106, 13, 173, 0.3);
-    animation: pulse 2.5s infinite;
+    transition: 0.5s ease;
 }
+
+.card.success { background: var(--cyan-accent); }
+
+.pulse-purple { animation: pulse 2.5s infinite; }
 
 @keyframes pulse {
     0% { transform: scale(1); }
@@ -35,37 +41,23 @@ header { padding: 60px 20px 20px; display: flex; justify-content: space-between;
 
 .whatsapp-section { padding: 20px; }
 .btn-purple-main {
-    width: 100%; padding: 15px; border-radius: 15px; border: none;
+    width: 100%; padding: 18px; border-radius: 20px; border: none;
     background: var(--purple-main); color: white; font-weight: bold; font-size: 16px;
+    box-shadow: 0 4px 15px rgba(106, 13, 173, 0.2);
 }
 
 .hidden { display: none; }
 
-.chat-item {
-    display: flex; align-items: center; padding: 15px;
-    border-bottom: 1px solid #F0F0F0;
+.qr-style {
+    display: flex; justify-content: center; margin-top: 20px;
+    padding: 15px; background: white; border-radius: 20px;
+    border: 4px solid var(--purple-main);
 }
 
-.avatar {
-    width: 50px; height: 50px; border-radius: 20px;
-    background: #EEE; display: flex; align-items: center; justify-content: center;
-    margin-right: 15px; font-size: 24px;
-}
-
+.chat-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #F8F8F8; }
+.avatar { width: 50px; height: 50px; border-radius: 18px; background: #F0F0F0; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px; }
 .online .avatar { border: 3px solid var(--success); }
-.offline .avatar { border: 3px solid #CCC; }
 
-.bottom-nav {
-    position: fixed; bottom: 0; width: 100%; height: 85px;
-    background: white; border-top: 1px solid #EEE;
-    display: flex; justify-content: space-around; align-items: center;
-}
-
-.nav-btn { background: none; border: none; font-weight: bold; color: #888; }
+.bottom-nav { position: fixed; bottom: 0; width: 100%; height: 85px; background: white; border-top: 1px solid #EEE; display: flex; justify-content: space-around; align-items: center; padding-bottom: 15px; }
+.nav-btn { background: none; border: none; font-weight: 700; color: #BBB; font-size: 14px; }
 .nav-btn.active { color: var(--purple-main); }
-
-.qr-mock {
-    width: 200px; height: 200px; background: #333; color: white;
-    margin: 20px auto; display: flex; align-items: center; justify-content: center;
-    border-radius: 20px; border: 5px solid var(--purple-main);
-}
