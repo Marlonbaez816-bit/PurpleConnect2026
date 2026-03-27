@@ -1,39 +1,40 @@
-// Lógica PurpleConnect 2026
+// Lógica de Proximidad 2026
 document.getElementById('proximity-btn').addEventListener('click', async () => {
     const btn = document.getElementById('proximity-btn');
-    btn.innerHTML = "<p>Buscando dispositivos cercanos...</p>";
-    btn.style.filter = "hue-rotate(45deg)";
-
-    // Simulación de detección por proximidad (NFC/Bluetooth)
-    if ('NDEFReader' in window) {
-        try {
-            const ndef = new NDEFReader();
-            await ndef.scan();
-            console.log("Escaneo NFC activado");
-        } catch (error) {
-            console.log("NFC no disponible, usando Bluetooth Beacon...");
-        }
-    }
-
-    // Simulamos que encuentra a alguien en 3 segundos
+    btn.innerHTML = "<p>Buscando otros iPhones...</p>";
+    
+    // Simulación de conexión P2P (Peer to Peer)
     setTimeout(() => {
-        alert("¡iPhone Detectado! Enviando chat por proximidad...");
-        btn.innerHTML = "<p>✅ Chat Enviado con éxito</p>";
-        btn.style.background = "#2ecc71"; // Cambia a verde éxito
-    }, 3000);
+        alert("📱 ¡Dispositivo Detectado! Sincronizando chat y videos...");
+        btn.style.background = "#2ecc71";
+        btn.innerHTML = "<p>✅ Datos Enviados por Proximidad</p>";
+    }, 2500);
 });
 
-// Función para el enlace con la App de Pagos (Transfermóvil/Enzona)
-document.getElementById('pay-link').addEventListener('click', () => {
-    const confirmPay = confirm("¿Deseas abrir el módulo de pagos para este contacto?");
-    if(confirmPay) {
-        window.location.href = "https://tu-usuario.github.io"; // Aquí irá tu otra app
+// Vinculación de WhatsApp
+document.getElementById('btn-sync-wa').addEventListener('click', () => {
+    const setup = document.getElementById('wa-setup');
+    const qrContainer = document.getElementById('qrcode-container');
+    const chatList = document.getElementById('chat-list');
+    
+    document.getElementById('btn-sync-wa').innerText = "Generando sesión segura...";
+    qrContainer.classList.remove('hidden');
+
+    // Simulamos que el usuario escanea el QR
+    setTimeout(() => {
+        alert("¡Conexión Exitosa con WhatsApp!");
+        setup.classList.add('hidden');
+        chatList.classList.remove('hidden');
+        
+        // Empezamos registro de estados
+        console.log("Iniciando monitoreo de estados en línea...");
+    }, 5000);
+});
+
+// Enlace con el sistema de pagos Cuba (Transfermóvil/Enzona)
+document.getElementById('pay-module').addEventListener('click', () => {
+    const r = confirm("¿Deseas abrir el panel de pagos para este contacto?");
+    if(r) {
+        window.location.href = "https://tu-usuario.github.io";
     }
 });
-
-// Monitor de "En Línea" (Simulación de Log)
-function trackStatus(contacto) {
-    const ahora = new Date().toLocaleTimeString();
-    console.log(`[LOG 2026] ${contacto} se conectó a las ${ahora}`);
-              }
-      
