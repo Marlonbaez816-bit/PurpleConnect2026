@@ -1,40 +1,57 @@
-// Lógica de Proximidad 2026
+// 1. Lógica de Proximidad con Envío Real (Web Share API)
 document.getElementById('proximity-btn').addEventListener('click', async () => {
     const btn = document.getElementById('proximity-btn');
-    btn.innerHTML = "<p>Buscando otros iPhones...</p>";
-    
-    // Simulación de conexión P2P (Peer to Peer)
-    setTimeout(() => {
-        alert("📱 ¡Dispositivo Detectado! Sincronizando chat y videos...");
-        btn.style.background = "#2ecc71";
-        btn.innerHTML = "<p>✅ Datos Enviados por Proximidad</p>";
-    }, 2500);
+    const text = document.getElementById('beam-text');
+
+    // Datos que se enviarán al acercar los teléfonos
+    const shareData = {
+        title: 'PurpleConnect Chat',
+        text: 'Te envío mis datos y archivos por proximidad morada 2026',
+        url: window.location.href
+    };
+
+    try {
+        // Intenta abrir el menú nativo de envío de iOS/Android
+        await navigator.share(shareData);
+        btn.classList.add('success');
+        text.innerText = "✅ Chat Enviado con éxito";
+    } catch (err) {
+        // Si el usuario cancela o el móvil no lo soporta
+        console.log("Compartición cancelada o no soportada");
+    }
 });
 
-// Vinculación de WhatsApp
+// 2. Generación de QR Real para WhatsApp
 document.getElementById('btn-sync-wa').addEventListener('click', () => {
     const setup = document.getElementById('wa-setup');
     const qrContainer = document.getElementById('qrcode-container');
-    const chatList = document.getElementById('chat-list');
+    const btn = document.getElementById('btn-sync-wa');
     
-    document.getElementById('btn-sync-wa').innerText = "Generando sesión segura...";
-    qrContainer.classList.remove('hidden');
-
-    // Simulamos que el usuario escanea el QR
+    btn.innerText = "Generando sesión segura...";
+    
+    // Generamos un QR real (Simulación de enlace de sesión)
     setTimeout(() => {
-        alert("¡Conexión Exitosa con WhatsApp!");
-        setup.classList.add('hidden');
-        chatList.classList.remove('hidden');
+        qrContainer.classList.remove('hidden');
+        new QRCode(document.getElementById("qrcode"), {
+            text: "https://wa.me", // URL de prueba
+            width: 180,
+            height: 180,
+            colorDark : "#6A0DAD",
+            colorLight : "#ffffff"
+        });
         
-        // Empezamos registro de estados
-        console.log("Iniciando monitoreo de estados en línea...");
-    }, 5000);
+        // Simulación de éxito tras 10 segundos
+        setTimeout(() => {
+            setup.classList.add('hidden');
+            document.getElementById('chat-list').classList.remove('hidden');
+            alert("¡WhatsApp Sincronizado!");
+        }, 10000);
+    }, 2000);
 });
 
-// Enlace con el sistema de pagos Cuba (Transfermóvil/Enzona)
+// 3. Enlace con la App de Pagos Cuba
 document.getElementById('pay-module').addEventListener('click', () => {
-    const r = confirm("¿Deseas abrir el panel de pagos para este contacto?");
-    if(r) {
+    if(confirm("¿Abrir panel de pagos para este contacto?")) {
         window.location.href = "https://tu-usuario.github.io";
     }
 });
